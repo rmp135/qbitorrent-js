@@ -186,11 +186,12 @@ interface TorrentTrackerResponse {
 }
 
 interface TorrentFileResponse {
-  is_seed: boolean
+  is_seed?: boolean
   name: string
   priority: number
   progress: number
   size: number
+  piece_range?: number[]
 }
 
 interface TorrentPeerResponse {
