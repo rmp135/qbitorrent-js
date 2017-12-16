@@ -14,7 +14,7 @@ export async function get<T> (url: string): Promise<T> {
   if (res.status === 403) {
     throw new RequestError(res.statusText, res.status)
   }
-  const size = Number.parseInt(res.headers.get("content-length"))
+  const size = Number.parseInt(res.headers.get('content-length'))
   if (size === 0) return undefined
   return await res.json()
 }
