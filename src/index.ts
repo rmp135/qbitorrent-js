@@ -7,7 +7,7 @@ import RequestError from './RequestError'
   }
   const client = new Client(options)
   try {
-    const res = await client.mainData()
+    const res = await client.pauseTorrent('08296d923e5d57a0b2b763aff6391b257c891b44')
     console.log(JSON.stringify(res, null, 2))
   } catch (error) {
     if (error instanceof RequestError) {

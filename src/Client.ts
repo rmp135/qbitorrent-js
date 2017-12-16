@@ -1,4 +1,4 @@
-import { get } from './network-tasks'
+import { post, get } from './network-tasks'
 import * as mapper from './mapper'
 
 export default class Client {
@@ -82,5 +82,25 @@ export default class Client {
    */
   async torrentFiles (torrentID: string) : Promise<TorrentFileResponse[]> {
     return get<TorrentFileResponse[]>(`${this.url}/query/propertiesFiles/${torrentID}`)
+  }
+
+  /**
+   * Pauses a torrent given by torrentID
+   * 
+   * @param {string} torrentID The torrent UID.
+   * @memberof Client
+   */
+  async pauseTorrent (torrentID: string) {
+    await post(`${this.url}/command/pause`, torrentID)
+  }
+
+  /**
+   * Resumes a torrent given by torrentID
+   * 
+   * @param {string} torrentID 
+   * @memberof Client
+   */
+  async resumeTorrent (torrentID: string) {
+    await post(`${this.url}/command/resume`, torrentID)
   }
 }
