@@ -7,10 +7,10 @@
     "build": "tsc"
   },
   "devDependencies": {
+    "@types/node-fetch": "^1.6.7",
     "typescript": "^2.6.2"
   },
   "dependencies": {
-    "@types/node-fetch": "^1.6.7",
     "node-fetch": "^1.7.3"
   }
 }
