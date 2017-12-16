@@ -1,0 +1,16 @@
+{
+  "name": "qbitorrent",
+  "version": "0.0.0",
+  "main": "dist/index.js",
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc"
+  },
+  "devDependencies": {
+    "typescript": "^2.6.2"
+  },
+  "dependencies": {
+    "@types/node-fetch": "^1.6.7",
+    "node-fetch": "^1.7.3"
+  }
+}
