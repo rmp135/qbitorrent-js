@@ -125,4 +125,14 @@ export default class Client {
   async setFilePriority (torrentID: string, fileIndex: number, priority: DownloadPriority) {
     await post(`${this.url}/command/setFilePrio`, { hash: torrentID, id: fileIndex, priority: priority })
   }
+
+  /**
+   * Triggers a recheck on the torret.
+   * 
+   * @param {string} torrentID The torrent UID.
+   * @memberof Client
+   */
+  async recheckTorrent (torrentID: string)  {
+    await post(`${this.url}/command/recheck`, { hash: torrentID })
+  }
 }
