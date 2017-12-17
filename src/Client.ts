@@ -135,4 +135,15 @@ export default class Client {
   async recheckTorrent (torrentID: string)  {
     await post(`${this.url}/command/recheck`, { hash: torrentID })
   }
+
+  /**
+   * Sets the super seeding mode for multiple torrents.
+   * 
+   * @param {string[]} torrents The torrents to set super seeding mode on.
+   * @param {boolean} value     Whether or not to set super seeding mode.
+   * @memberof Client
+   */
+  async setSuperSpeedingMode (torrents: string[], value: boolean) {
+    await post(`${this.url}/command/setSuperSeeding`, { hashes: torrents.join('|'), value })
+  }
 }
