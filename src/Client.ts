@@ -1,4 +1,4 @@
-import { post, get } from './network-tasks'
+import { post, get, getText } from './network-tasks'
 import * as mapper from './mapper'
 
 import {
@@ -8,7 +8,8 @@ import {
   TorrentGeneralResponse,
   TorrentPeerResponse,
   TorrentTrackerResponse,
-  DownloadPriority
+  DownloadPriority,
+  DownloadOptions
 } from './typings'
 
 export default class Client {
@@ -146,4 +147,52 @@ export default class Client {
   async setSuperSpeedingMode (torrents: string[], value: boolean) {
     await post(`${this.url}/command/setSuperSeeding`, { hashes: torrents.join('|'), value })
   }
+
+  /**
+   * Get the default save path.
+   * 
+   * @returns {Promise<string>} 
+   * @memberof Client
+   */
+  async getSavePath (): Promise<string> {
+    return getText(`${this.url}/command/getSavePath`)
+  }
+
+  /**
+   * Delete torrents and optionally the files.
+   * 
+   * @param {string[]} torrents   List of torrents to delete.
+   * @param {boolean} deleteFiles Whether to also delete the files.
+   * @memberof Client
+   */
+  async delete (torrents: string[], deleteFiles: boolean) {
+    if (deleteFiles) {
+      await post(`${this.url}/command/deletePerm`, { hashes: torrents.join('|') })
+    } else {
+      await post(`${this.url}/command/delete`, { hashes: torrents.join('|') })
+    }
+  }
+
+  /**
+   * Download torrents using links (magnet / remote).
+   * 
+   * @param {DownloadOptions} options 
+   * @memberof Client
+   */
+  async downloadLinks (options: DownloadOptions) {
+    const newOptions = {
+      urls: options.urls.join('\n'),
+      savepath: options.savepath,
+      cookie: options.cookie || '',
+      rename: options.rename || '',
+      category: options.category || '',
+      paused: options.paused || false,
+      dlLimit: options.dlLimit || '',
+      upLimit: options.upLimit || '',
+      firstLastPiecePrio: options.firstLastPiecePriority || false,
+      root_folder: options.createSubfolder || false
+    }
+    await post(`${this.url}/command/download`, options)
+  }
 }
+

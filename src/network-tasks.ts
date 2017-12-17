@@ -11,13 +11,17 @@ import * as FormData from 'form-data'
  * @returns {Promise<T>} 
  */
 export async function get<T> (url: string): Promise<T> {
+  const res = await getText(url)
+  if (res === '') return undefined
+  return JSON.parse(res)
+}
+
+export async function getText (url: string): Promise<string> {
   const res = await nodefetch(url)
   if (res.status === 403) {
     throw new RequestError(res.statusText, res.status)
   }
-  const size = Number.parseInt(res.headers.get('content-length'))
-  if (size === 0) return undefined
-  return await res.json()
+  return await res.text()
 }
 
 /**

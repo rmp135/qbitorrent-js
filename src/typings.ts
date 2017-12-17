@@ -1,3 +1,16 @@
+export interface DownloadOptions {
+  urls: string[]
+  savepath: string
+  cookie?: string
+  rename?: string
+  category?: string
+  paused?: boolean
+  dlLimit?: number
+  upLimit?: number
+  firstLastPiecePriority?: boolean
+  createSubfolder?: boolean
+}
+
 export enum DownloadPriority {
   IGNORED = 0,
   NORMAL = 1,
