@@ -20,8 +20,20 @@ export async function get<T> (url: string): Promise<T> {
   return await res.json()
 }
 
-export async function post (url: string, torrentID: string) {
+/**
+ * Posts a command. 
+ * 
+ * Commands will not be verified whether they have succeeded.
+ * 
+ * @export
+ * @param {string} url 
+ * @param {{ [key: string]: any }} data 
+ * @returns 
+ */
+export async function post (url: string, data: { [key: string]: any }) {
   const formdata = new FormData()
-  formdata.append('hash', torrentID)
+  for (let key in data) {
+    formdata.append(key, data[key])
+  }
   return nodefetch(url, { method: 'POST', body: formdata })
 }

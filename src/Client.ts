@@ -91,7 +91,7 @@ export default class Client {
    * @memberof Client
    */
   async pauseTorrent (torrentID: string) {
-    await post(`${this.url}/command/pause`, torrentID)
+    await post(`${this.url}/command/pause`, { hash: torrentID })
   }
 
   /**
@@ -101,6 +101,6 @@ export default class Client {
    * @memberof Client
    */
   async resumeTorrent (torrentID: string) {
-    await post(`${this.url}/command/resume`, torrentID)
+    await post(`${this.url}/command/resume`, { hash: torrentID })
   }
 }
