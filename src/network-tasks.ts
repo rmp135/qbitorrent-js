@@ -33,7 +33,7 @@ export async function get<T> (url: string): Promise<T> {
 export async function post (url: string, data: { [key: string]: any }) {
   const formdata = new FormData()
   for (let key in data) {
-    formdata.append(key, data[key])
+    formdata.append(key, data[key].toString())
   }
   return nodefetch(url, { method: 'POST', body: formdata })
 }
