@@ -21,7 +21,7 @@ export async function get<T> (url: string): Promise<T> {
 }
 
 /**
- * Posts a command. 
+ * Posts a command with given formdata. 
  * 
  * Commands will not be verified whether they have succeeded.
  * 

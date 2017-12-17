@@ -1,8 +1,15 @@
-interface ClientOptions {
+export enum DownloadPriority {
+  IGNORED = 0,
+  NORMAL = 1,
+  HIGH = 6,
+  MAXIMUM = 7
+}
+
+export interface ClientOptions {
   url: string
 }
 
-interface MainData {
+export interface MainData {
   /**
    * All available categories.
    */
@@ -72,7 +79,7 @@ interface MainData {
   }[]
 }
 
-interface MainDataResponse {
+export interface MainDataResponse {
   categories: string[]
   full_update: boolean
   rid: number
@@ -142,7 +149,7 @@ interface MainDataResponse {
   }
 }
 
-interface TorrentGeneralResponse {
+export interface TorrentGeneralResponse {
   addition_date: number
   comment: string
   completion_date: number
@@ -178,14 +185,14 @@ interface TorrentGeneralResponse {
   up_speed_avg: number
 }
 
-interface TorrentTrackerResponse {
+export interface TorrentTrackerResponse {
   msg: string
   num_peers: number
   status: string
   url: string
 }
 
-interface TorrentFileResponse {
+export interface TorrentFileResponse {
   is_seed?: boolean
   name: string
   priority: number
@@ -194,7 +201,7 @@ interface TorrentFileResponse {
   piece_range?: number[]
 }
 
-interface TorrentPeerResponse {
+export interface TorrentPeerResponse {
   full_update: boolean
   rid: number
   show_flags: string

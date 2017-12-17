@@ -1,6 +1,16 @@
 import { post, get } from './network-tasks'
 import * as mapper from './mapper'
 
+import {
+  ClientOptions,
+  MainDataResponse,
+  TorrentFileResponse,
+  TorrentGeneralResponse,
+  TorrentPeerResponse,
+  TorrentTrackerResponse,
+  DownloadPriority
+} from './typings'
+
 export default class Client {
   /**
    * The url of the qBittorent instance.
@@ -102,5 +112,17 @@ export default class Client {
    */
   async resumeTorrent (torrentID: string) {
     await post(`${this.url}/command/resume`, { hash: torrentID })
+  }
+
+  /**
+   * Sets the priority of a file.
+   * 
+   * @param {string} torrentID          The torrent UID.
+   * @param {number} fileIndex          The location of the file in the file list.
+   * @param {DownloadPriority} priority The priority to set.
+   * @memberof Client
+   */
+  async setFilePriority (torrentID: string, fileIndex: number, priority: DownloadPriority) {
+    await post(`${this.url}/command/setFilePrio`, { hash: torrentID, id: fileIndex, priority: priority })
   }
 }
