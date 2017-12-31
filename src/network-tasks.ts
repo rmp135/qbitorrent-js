@@ -1,6 +1,7 @@
 import nodefetch from 'node-fetch'
 import RequestError from './RequestError'
 import * as FormData from 'form-data'
+import { Stream } from 'stream';
 
 /**
  * Retrieves an instance of type T, or undefined if the resource does not exist.
@@ -34,7 +35,7 @@ export async function getText (url: string): Promise<string> {
  * @param {{ [key: string]: any }} data
  * @returns
  */
-export async function post (url: string, data: { [key: string]: any }, headers?: { [key: string]: string }) {
+export async function post (url: string, data: { [key: string]: string | Stream }, headers?: { [key: string]: string }) {
   const formdata = new FormData()
   console.log(data)
   for (let key in data) {

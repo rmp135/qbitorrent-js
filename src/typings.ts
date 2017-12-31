@@ -9,7 +9,9 @@ export interface SharedDownloadOptions {
   dlLimit?: number
   upLimit?: number
   firstLastPiecePriority?: boolean
-  createSubfolder?: boolean
+  createSubfolder?: boolean,
+  sequential?: boolean,
+  skipChecking?: boolean
 }
 
 export interface FileDownloadOptions extends SharedDownloadOptions {

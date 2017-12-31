@@ -192,7 +192,9 @@ export default class Client {
       dlLimit: 0,
       upLimit: 0,
       firstLastPiecePriority: false,
-      createSubfolder: false
+      createSubfolder: false,
+      skipChecking: false,
+      sequential: false
     } as WebDownloadOptions, options)
 
     const downloadOptions = {
@@ -201,11 +203,13 @@ export default class Client {
       cookie: mergedOptions.cookie,
       rename: mergedOptions.rename,
       category: mergedOptions.category,
-      paused: mergedOptions.paused,
-      dlLimit: mergedOptions.dlLimit,
-      upLimit: mergedOptions.upLimit,
-      firstLastPiecePrio: mergedOptions.firstLastPiecePriority,
-      root_folder: mergedOptions.createSubfolder
+      paused: mergedOptions.paused.toString(),
+      dlLimit: mergedOptions.dlLimit.toString(),
+      upLimit: mergedOptions.upLimit.toString(),
+      firstLastPiecePrio: mergedOptions.firstLastPiecePriority.toString(),
+      root_folder: mergedOptions.createSubfolder.toString(),
+      sequentialDownload: mergedOptions.sequential.toString(),
+      skip_checking: mergedOptions.skipChecking.toString()
     }
     await post(`${this.url}/command/download`, downloadOptions)
   }
@@ -222,7 +226,9 @@ export default class Client {
       dlLimit: 0,
       upLimit: 0,
       firstLastPiecePriority: false,
-      createSubfolder: true
+      createSubfolder: true,
+      skipChecking: false,
+      sequential: false
     } as FileDownloadOptions, options)
 
     const downloadOptions = {
@@ -235,7 +241,9 @@ export default class Client {
       dlLimit: '',
       upLimit: '',
       firstLastPiecePrio: mergedOptions.firstLastPiecePriority.toString(),
-      root_folder: mergedOptions.createSubfolder.toString()
+      root_folder: mergedOptions.createSubfolder.toString(),
+      sequentialDownload: mergedOptions.sequential.toString(),
+      skip_checking: mergedOptions.skipChecking.toString()
     }
 
     // The file size calculation isn't perfect but it's close enough to work.
