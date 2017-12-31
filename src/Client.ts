@@ -126,7 +126,7 @@ export default class Client {
    * @memberof Client
    */
   async setFilePriority (torrentID: string, fileIndex: number, priority: DownloadPriority) {
-    await post(`${this.url}/command/setFilePrio`, { hash: torrentID, id: fileIndex, priority: priority })
+    await post(`${this.url}/command/setFilePrio`, { hash: torrentID, id: fileIndex.toString(), priority: priority.toString() })
   }
 
   /**
@@ -147,7 +147,7 @@ export default class Client {
    * @memberof Client
    */
   async setSuperSpeedingMode (torrents: string[], value: boolean) {
-    await post(`${this.url}/command/setSuperSeeding`, { hashes: torrents.join('|'), value })
+    await post(`${this.url}/command/setSuperSeeding`, { hashes: torrents.join('|'), value: value.toString() })
   }
 
   /**
