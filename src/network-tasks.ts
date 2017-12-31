@@ -4,11 +4,11 @@ import * as FormData from 'form-data'
 
 /**
  * Retrieves an instance of type T, or undefined if the resource does not exist.
- * 
+ *
  * @export
  * @template T           The type to return.
  * @param {string} url   The url to retrieve the model from.
- * @returns {Promise<T>} 
+ * @returns {Promise<T>}
  */
 export async function get<T> (url: string): Promise<T> {
   const res = await getText(url)
@@ -25,19 +25,22 @@ export async function getText (url: string): Promise<string> {
 }
 
 /**
- * Posts a command with given formdata. 
- * 
+ * Posts a command with given formdata.
+ *
  * Commands will not be verified whether they have succeeded.
- * 
+ *
  * @export
- * @param {string} url 
- * @param {{ [key: string]: any }} data 
- * @returns 
+ * @param {string} url
+ * @param {{ [key: string]: any }} data
+ * @returns
  */
-export async function post (url: string, data: { [key: string]: any }) {
+export async function post (url: string, data: { [key: string]: any }, headers?: { [key: string]: string }) {
   const formdata = new FormData()
+  console.log(data)
   for (let key in data) {
-    formdata.append(key, data[key].toString())
+    formdata.append(key, data[key])
   }
-  return nodefetch(url, { method: 'POST', body: formdata })
+  const newHeaders = Object.assign({}, headers)
+
+  return nodefetch(url, { method: 'POST', body: formdata, headers: newHeaders })
 }

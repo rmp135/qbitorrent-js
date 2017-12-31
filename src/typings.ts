@@ -1,5 +1,6 @@
-export interface DownloadOptions {
-  urls: string[]
+import { ReadStream } from "fs";
+
+export interface SharedDownloadOptions {
   savepath: string
   cookie?: string
   rename?: string
@@ -9,6 +10,14 @@ export interface DownloadOptions {
   upLimit?: number
   firstLastPiecePriority?: boolean
   createSubfolder?: boolean
+}
+
+export interface FileDownloadOptions extends SharedDownloadOptions {
+  file: string
+}
+
+export interface WebDownloadOptions extends SharedDownloadOptions {
+  urls: string[]
 }
 
 export enum DownloadPriority {

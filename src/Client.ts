@@ -1,6 +1,7 @@
 import { post, get, getText } from './network-tasks'
 import * as mapper from './mapper'
-
+import { stat, createReadStream } from 'fs'
+import { promisify } from 'util'
 import {
   ClientOptions,
   MainDataResponse,
@@ -9,7 +10,8 @@ import {
   TorrentPeerResponse,
   TorrentTrackerResponse,
   DownloadPriority,
-  DownloadOptions
+  WebDownloadOptions,
+  FileDownloadOptions
 } from './typings'
 
 export default class Client {
@@ -176,23 +178,70 @@ export default class Client {
   /**
    * Download torrents using links (magnet / remote).
    * 
-   * @param {DownloadOptions} options 
+   * @param {WebDownloadOptions} options 
    * @memberof Client
    */
-  async downloadLinks (options: DownloadOptions) {
-    const newOptions = {
-      urls: options.urls.join('\n'),
-      savepath: options.savepath,
-      cookie: options.cookie || '',
-      rename: options.rename || '',
-      category: options.category || '',
-      paused: options.paused || false,
-      dlLimit: options.dlLimit || '',
-      upLimit: options.upLimit || '',
-      firstLastPiecePrio: options.firstLastPiecePriority || false,
-      root_folder: options.createSubfolder || false
+  async downloadLinks (options: WebDownloadOptions) {
+    const mergedOptions = Object.assign({
+      urls: [],
+      savepath: '',
+      cookie: '',
+      rename: '',
+      category: '',
+      paused: false,
+      dlLimit: 0,
+      upLimit: 0,
+      firstLastPiecePriority: false,
+      createSubfolder: false
+    } as WebDownloadOptions, options)
+
+    const downloadOptions = {
+      urls: mergedOptions.urls.join('\n'),
+      savepath: mergedOptions.savepath,
+      cookie: mergedOptions.cookie,
+      rename: mergedOptions.rename,
+      category: mergedOptions.category,
+      paused: mergedOptions.paused,
+      dlLimit: mergedOptions.dlLimit,
+      upLimit: mergedOptions.upLimit,
+      firstLastPiecePrio: mergedOptions.firstLastPiecePriority,
+      root_folder: mergedOptions.createSubfolder
     }
-    await post(`${this.url}/command/download`, options)
+    await post(`${this.url}/command/download`, downloadOptions)
+  }
+
+  async downloadFile (options: FileDownloadOptions) {
+    const file = await promisify(stat)(options.file)
+
+    const mergedOptions = Object.assign({
+      savepath: '',
+      cookie: '',
+      rename: '',
+      category: '',
+      paused: false,
+      dlLimit: 0,
+      upLimit: 0,
+      firstLastPiecePriority: false,
+      createSubfolder: true
+    } as FileDownloadOptions, options)
+
+    const downloadOptions = {
+      "fileselect[]": createReadStream(options.file),
+      savepath: mergedOptions.savepath,
+      cookie: mergedOptions.cookie,
+      rename: mergedOptions.rename,
+      category: mergedOptions.category,
+      paused: mergedOptions.paused.toString(),
+      dlLimit: '',
+      upLimit: '',
+      firstLastPiecePrio: mergedOptions.firstLastPiecePriority.toString(),
+      root_folder: mergedOptions.createSubfolder.toString()
+    }
+
+    // The file size calculation isn't perfect but it's close enough to work.
+    const bodylen = JSON.stringify(downloadOptions).length
+    const headers = { 'Content-Length': (file.size + bodylen).toString() }
+
+    await post(`${this.url}/command/upload`, downloadOptions, headers)
   }
 }
-
