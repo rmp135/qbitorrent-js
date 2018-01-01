@@ -35,7 +35,10 @@ export default class Client {
   rid: number
 
   constructor (options?: ClientOptions) {
-    this.url = options.url || 'http://localhost:8080'
+    const mergedOptions: ClientOptions = {
+      url: 'http://localhost:8080'
+    }
+    this.url = mergedOptions.url
   }
 
   /**

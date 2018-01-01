@@ -30,7 +30,7 @@ export enum DownloadPriority {
 }
 
 export interface ClientOptions {
-  url: string
+  url?: string
 }
 
 export enum QueryTorrentFilter {
