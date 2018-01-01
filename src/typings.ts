@@ -33,6 +33,65 @@ export interface ClientOptions {
   url: string
 }
 
+export enum QueryTorrentFilter {
+  ALL = 'all',
+  DOWNLOADING = 'downloading',
+  SEEDING = 'seeding',
+  COMPLETED = 'completed',
+  PAUSED = 'paused',
+  RESUMED = 'paused',
+  ACTIVE = 'active',
+  INACTIVE = 'inactive'
+}
+
+export interface QueryTorrentsParameters {
+  filter?: 'all' | 'downloading' | 'seeding' | 'completed' | 'paused' | 'resumed' | 'active' | 'inactive',
+  category?: string
+  sort?: string
+  reverse?: boolean
+  limit?: number
+  offset?: number
+}
+
+export interface QueryTorrentResponse {
+  added_on: number
+  amount_left: number
+  auto_tmm: boolean
+  category: string
+  completed: number
+  completion_on: number
+  dl_limit: number
+  dlspeed: number
+  downloaded: number
+  downloaded_session: number
+  eta: number
+  hash: string
+  force_start: boolean
+  last_activity: number
+  magnet_url: string
+  name: string
+  num_complete: number
+  num_incomplete: number
+  num_leechs: number
+  num_seeds: number
+  priority: number
+  progress: number
+  ratio: number
+  ratio_limit: number
+  save_path: string
+  seen_complete: number
+  seq_dl: boolean
+  size: number
+  state: string
+  super_seeeding: boolean
+  total_size: number
+  tracker: string
+  up_limit: boolean
+  uploaded: number
+  uploaded_session: number
+  upspeed: number
+}
+
 export interface MainData {
   /**
    * All available categories.

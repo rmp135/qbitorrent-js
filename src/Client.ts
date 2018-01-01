@@ -11,7 +11,10 @@ import {
   TorrentTrackerResponse,
   DownloadPriority,
   WebDownloadOptions,
-  FileDownloadOptions
+  FileDownloadOptions,
+  QueryTorrentResponse,
+  QueryTorrentFilter,
+  QueryTorrentsParameters
 } from './typings'
 
 export default class Client {
@@ -36,7 +39,7 @@ export default class Client {
   }
 
   /**
-   * Queries the list of torrents and qBittorent client information.
+   * Returns the main data differences since the last time this method was called.
    * 
    * @returns {Promise<MainDataResponse>} 
    * @memberof Client
@@ -47,6 +50,17 @@ export default class Client {
       this.rid = response.rid
     }
     return response
+  }
+
+  /**
+   * Returns a list of torrents optionally filtered by paramters.
+   * 
+   * @param {QueryTorrentsParameters} [parameters] Paramters to filter the torrents by.
+   * @returns {Promise<QueryTorrentResponse[]>} 
+   * @memberof Client
+   */
+  async queryTorrents (parameters?: QueryTorrentsParameters): Promise<QueryTorrentResponse[]> {
+    return await get<QueryTorrentResponse[]>(`${this.url}/query/torrents`, parameters)
   }
 
   /**
@@ -214,6 +228,12 @@ export default class Client {
     await post(`${this.url}/command/download`, downloadOptions)
   }
 
+  /**
+   * Downloads torrents using .torrent files.
+   * 
+   * @param {FileDownloadOptions} options Download options.
+   * @memberof Client
+   */
   async downloadFile (options: FileDownloadOptions) {
     const file = await promisify(stat)(options.file)
 
