@@ -252,4 +252,22 @@ export default class Client {
 
     await post(`${this.url}/command/upload`, downloadOptions, headers)
   }
+
+  /**
+   * Pause all torrents
+   * 
+   * @memberof Client
+   */
+  async pauseAll() {
+    await post(`${this.url}/command/pauseAll`)
+  }
+
+  /**
+   * Resumes all torrents.
+   * 
+   * @memberof Client
+   */
+  async resumeAll() {
+    await post(`${this.url}/command/resumeAll`)
+  }
 }
