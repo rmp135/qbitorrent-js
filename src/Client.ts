@@ -19,7 +19,7 @@ import {
 
 export default class Client {
   /**
-   * The url of the qBittorent instance.
+   * The url of the qBittorrent instance.
    * 
    * @type {string}
    * @memberof Client
@@ -27,7 +27,7 @@ export default class Client {
   url: string
 
   /**
-   * The last response id for partial updating. Will be automatically populated.
+   * The last response id for partial retrieval. Will be automatically populated.
    * 
    * @type {number}
    * @memberof Client
