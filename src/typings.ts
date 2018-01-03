@@ -45,7 +45,7 @@ export enum QueryTorrentFilter {
 }
 
 export interface QueryTorrentsParameters {
-  filter?: 'all' | 'downloading' | 'seeding' | 'completed' | 'paused' | 'resumed' | 'active' | 'inactive',
+  filter?: QueryTorrentFilter,
   category?: string
   sort?: string
   reverse?: boolean
