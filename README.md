@@ -305,3 +305,19 @@ await client.downloadLinks({
   sequential: false
 })
 ```
+
+### Client.pauseAll
+
+Pauses all torrents.
+
+```js
+await client.pauseAll()
+```
+
+### Client.resumeAll
+
+Resumes all paused torrents.
+
+```js
+await client.resumeAll()
+```
