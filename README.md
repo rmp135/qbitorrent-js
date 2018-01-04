@@ -321,3 +321,13 @@ Resumes all paused torrents.
 ```js
 await client.resumeAll()
 ```
+
+## Error Handling
+
+If a response is returned from the server that isn't status 200, a `ResponseError` will be thrown. This contains the `status`, `body` and text description of the status as the message.
+
+This  can be imported.
+
+```js
+import { RequestError } from '@rmp135/qbittorrent-js'
+```

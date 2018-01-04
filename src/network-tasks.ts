@@ -29,6 +29,8 @@ export async function getText (url: string, parameters?: { [key:string]: any }):
   const res = await nodefetch(url)
   if (res.status === 403) {
     throw new RequestError(res.statusText, res.status)
+  if (res.status !== 200) {
+    throw new RequestError(await res.text(), res.status, res.statusText)
   }
   return await res.text()
 }

@@ -1,4 +1,5 @@
 import Client from './Client'
+import RequestError from './RequestError'
 import {
   ClientOptions,
   DownloadPriority,
@@ -17,7 +18,8 @@ export {
   FileDownloadOptions,
   SharedDownloadOptions,
   WebDownloadOptions,
-  Client
+  Client,
+  RequestError
 }
 
 export default Client
