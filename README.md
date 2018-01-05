@@ -356,6 +356,30 @@ Shutdown the instance of qBittorrent. Warning: This is an immediate action and w
 await client.shutdown()
 ```
 
+### Client.addCategory
+
+Adds a category to a torrent.
+
+```js
+await client.addCategory('d114681d63fde7da0d4b33acb8d325e801b9049d', 'FOSS')
+```
+
+### Client.removeCategories
+
+Removes categories.
+
+```js
+await client.addCategory(['FOSS', 'Software'])
+```
+
+### Client.setCategory
+
+Sets a particular category to a number of torrents.
+
+```js
+await client.addCategory(['d114681d63fde7da0d4b33acb8d325e801b9049d', '64affd58c8ccf2147fb3e6feaadea982fccbd05a'], 'FOSS'])
+```
+
 ## Error Handling
 
 If a response is returned from the server that isn't status 200, a `ResponseError` will be thrown. This contains the `status`, `body` and text description of the status as the message.

@@ -331,4 +331,35 @@ export default class Client {
   async shutdown() {
     await post(`${this.url}/command/shutdown`)
   }
+
+  /**
+   * Adds a category.
+   * 
+   * @param {string} category The name of the category to add.
+   * @memberof Client
+   */
+  async addCategory(category: string) {
+    await post(`${this.url}/command/addCategory`, { category })
+  }
+  
+  /**
+   * Removes multiple categories.
+   * 
+   * @param {string[]} categories The names of the categories to remove.
+   * @memberof Client
+   */
+  async removeCategories(categories: string[]) {
+    await post(`${this.url}/command/removeCategories`, { categories: categories.join('\n') })
+  }
+  
+  /**
+   * Sets a category to torrents.
+   * 
+   * @param {string[]} torrents 
+   * @param {string} category 
+   * @memberof Client
+   */
+  async setCategory(torrents: string[], category: string) {
+    await post(`${this.url}/command/setCategory`, { hashes: torrents.join('|'), category })
+  }
 }
