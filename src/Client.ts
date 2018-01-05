@@ -362,4 +362,15 @@ export default class Client {
   async setCategory(torrents: string[], category: string) {
     await post(`${this.url}/command/setCategory`, { hashes: torrents.join('|'), category })
   }
+  
+  /**
+   * Renames a torrent.
+   * 
+   * @param {string} torrent The torrent UID.
+   * @param {string} name    The new name for the torrent.
+   * @memberof Client
+   */
+  async rename(torrent: string, name: string) {
+    await post(`${this.url}/command/rename`, { hash: torrent, name })
+  }
 }

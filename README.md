@@ -380,6 +380,18 @@ Sets a particular category to a number of torrents.
 await client.addCategory(['d114681d63fde7da0d4b33acb8d325e801b9049d', '64affd58c8ccf2147fb3e6feaadea982fccbd05a'], 'FOSS'])
 ```
 
+### Client.rename
+
+Renames a torrent.
+
+Parameters:
+- torrentID: string : The ID of the torrent.
+- name: string : The new name of the torrent.
+
+```js
+await client.rename('64affd58c8ccf2147fb3e6feaadea982fccbd05a', 'newname')
+```
+
 ## Error Handling
 
 If a response is returned from the server that isn't status 200, a `ResponseError` will be thrown. This contains the `status`, `body` and text description of the status as the message.
