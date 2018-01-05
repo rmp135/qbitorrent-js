@@ -1,5 +1,4 @@
 import { post, get, getText } from './network-tasks'
-import * as mapper from './mapper'
 import { stat, createReadStream } from 'fs'
 import { promisify } from 'util'
 import {
