@@ -48,7 +48,7 @@ export default class Client {
    * @memberof Client
    */
   async mainData (): Promise<MainDataResponse> {
-    const response = await get<MainDataResponse>(`${this.url}/sync/maindata`)
+    const response = await get<MainDataResponse>(`${this.url}/sync/maindata`, { rid: this.rid })
     if (response !== undefined) {
       this.rid = response.rid
     }
@@ -96,7 +96,7 @@ export default class Client {
    * @memberof Client
    */
   async torrentPeers (torrentID: string): Promise<TorrentPeerResponse> {
-    const response = await get<TorrentPeerResponse>(`${this.url}/sync/torrent_peers/${torrentID}`)
+    const response = await get<TorrentPeerResponse>(`${this.url}/sync/torrent_peers/${torrentID}`, { rid: this.rid })
     if (response !== undefined) {
       this.rid = response.rid
     }
