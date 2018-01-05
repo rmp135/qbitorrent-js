@@ -52,6 +52,8 @@ await client.setFilePriority('08296d923e5d57a0b2b763aff6391b257c891b44', 1, Down
 
 ```
 
+The latest version of the qBittorrent api that has been fully tested against is 17. Use `client.apiVersion` to check. It may work with earlier versions but there's no guarantee.
+
 ## Further Usage
 
 ## Client
@@ -320,6 +322,30 @@ Resumes all paused torrents.
 
 ```js
 await client.resumeAll()
+```
+
+### Client.apiVersion
+
+The version of the qBittorrent Web api. 
+
+```js
+await client.apiVersion()
+```
+
+### Client.apiVersionMin
+
+The oldest version of the qBittorrent Web api that qBittorrent is backwards compatible with.
+
+```js
+await client.apiVersionMin()
+```
+
+### Client.version
+
+The version of qBittorrent (e.g. "v4.0.1").
+
+```js
+await client.version()
 ```
 
 ## Error Handling

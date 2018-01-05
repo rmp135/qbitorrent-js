@@ -292,4 +292,34 @@ export default class Client {
   async resumeAll() {
     await post(`${this.url}/command/resumeAll`)
   }
+
+  /**
+   * Returns the version of the qBittorrent api.
+   * 
+   * @returns {Promise<number>} The version number of the qBittorrent api.
+   * @memberof Client
+   */
+  async apiVersion(): Promise<number> {
+    return parseInt(await getText(`${this.url}/version/api`))
+  }
+  
+  /**
+   * Returns the api version that qBittorrent is backwards compatible with.
+   * 
+   * @returns {Promise<number>} The minumum version number of the qBittorrent api.
+   * @memberof Client
+   */
+  async apiVersionMin(): Promise<number> {
+    return parseInt(await getText(`${this.url}/version/api_min`))
+  }
+  
+  /**
+   * Returns the qBittorrent version.
+   * 
+   * @returns {Promise<string>} The version of qBittorrent.
+   * @memberof Client
+   */
+  async version(): Promise<string> {
+    return await getText(`${this.url}/version/qbittorrent`)
+  }
 }
