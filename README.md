@@ -392,6 +392,22 @@ Parameters:
 await client.rename('64affd58c8ccf2147fb3e6feaadea982fccbd05a', 'newname')
 ```
 
+### Client.getGlobalUploadLimit
+
+Returns the global upload limit in bytes per second.
+
+```js
+await client.getGlobalUploadLimit()
+```
+
+### Client.getGlobalDownloadLimit
+
+Returns the global download limit in bytes per second.
+
+```js
+await client.getGlobalDownloadLimit()
+```
+
 ## Error Handling
 
 If a response is returned from the server that isn't status 200, a `ResponseError` will be thrown. This contains the `status`, `body` and text description of the status as the message.

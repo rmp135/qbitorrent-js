@@ -373,4 +373,24 @@ export default class Client {
   async rename(torrent: string, name: string) {
     await post(`${this.url}/command/rename`, { hash: torrent, name })
   }
+
+  /**
+   * Returns the global upload limit.
+   * 
+   * @returns {Promise<number>} 
+   * @memberof Client
+   */
+  async getGlobalUploadLimit(): Promise<number> {
+    return parseInt(await getText(`${this.url}/command/getGlobalUpLimit`))
+  }
+
+  /**
+   * Returns the global download limit.
+   * 
+   * @returns {Promise<number>} 
+   * @memberof Client
+   */
+  async getGlobalDownloadLimit(): Promise<number> {
+    return parseInt(await getText(`${this.url}/command/getGlobalDlLimit`))
+  }
 }
