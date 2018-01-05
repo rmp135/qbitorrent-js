@@ -4,8 +4,6 @@ import * as FormData from 'form-data'
 import { Stream } from 'stream'
 import * as querystring from 'querystring'
 
-const proxy = require('http-proxy-agent')
-
 /**
  * Retrieves an instance of type T, or undefined if the resource does not exist.
  *
@@ -50,7 +48,5 @@ export async function post (url: string, data?: { [key: string]: string | Stream
     formdata.append(key, mergedData[key])
   }
   const newHeaders = Object.assign({}, headers)
-
-  // const agent = new proxy('http://localhost:8888')
   return nodefetch(url, { method: 'POST', body: formdata, headers: newHeaders })
 }
