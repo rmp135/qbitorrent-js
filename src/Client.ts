@@ -322,4 +322,13 @@ export default class Client {
   async version(): Promise<string> {
     return await getText(`${this.url}/version/qbittorrent`)
   }
+
+  /**
+   * Shuts down the qBittorrent instance. 
+   * 
+   * @memberof Client
+   */
+  async shutdown() {
+    await post(`${this.url}/command/shutdown`)
+  }
 }

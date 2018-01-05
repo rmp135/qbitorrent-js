@@ -348,6 +348,14 @@ The version of qBittorrent (e.g. "v4.0.1").
 await client.version()
 ```
 
+### Client.shutdown
+
+Shutdown the instance of qBittorrent. Warning: This is an immediate action and will not prompt for confirmation.
+
+```js
+await client.shutdown()
+```
+
 ## Error Handling
 
 If a response is returned from the server that isn't status 200, a `ResponseError` will be thrown. This contains the `status`, `body` and text description of the status as the message.
