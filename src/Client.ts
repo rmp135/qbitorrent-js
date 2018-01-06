@@ -13,7 +13,8 @@ import {
   FileDownloadOptions,
   QueryTorrentResponse,
   QueryTorrentFilter,
-  QueryTorrentsParameters
+  QueryTorrentsParameters,
+  TransferInfoResponse
 } from './typings'
 
 export default class Client {
@@ -392,5 +393,15 @@ export default class Client {
    */
   async getGlobalDownloadLimit(): Promise<number> {
     return parseInt(await getText(`${this.url}/command/getGlobalDlLimit`))
+  }
+
+  /**
+   * Returns information about the overall transfer state of the client.
+   * 
+   * @returns {Promise<TransferInfoResponse>} 
+   * @memberof Client
+   */
+  async transferInfo(): Promise<TransferInfoResponse> {
+    return get<TransferInfoResponse>(`${this.url}/query/transferInfo`)
   }
 }

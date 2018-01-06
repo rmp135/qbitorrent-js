@@ -408,6 +408,14 @@ Returns the global download limit in bytes per second.
 await client.getGlobalDownloadLimit()
 ```
 
+### Client.transferInfo
+
+Returns information about the overall transfer state of the client.
+
+```js
+await client.transferInfo()
+```
+
 ## Error Handling
 
 If a response is returned from the server that isn't status 200, a `ResponseError` will be thrown. This contains the `status`, `body` and text description of the status as the message.

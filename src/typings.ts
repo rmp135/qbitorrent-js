@@ -307,3 +307,26 @@ export interface TorrentPeerResponse {
     }
   }
 }
+
+export interface TransferInfoResponse {
+  alltime_dl: number
+  alltime_ul: number
+  average_time_queue: number
+  connection_status: string
+  dht_nodes: number
+  dl_info_data: number
+  dl_info_speeed: number
+  dl_rate_limit: number
+  global_ratio: string
+  queued_io_jobs: number
+  read_cache_hits: string
+  read_cache_overload: string
+  total_buffers_size: number
+  total_peer_connections: number
+  total_queued_size: number
+  total_wasted_session: number
+  up_info_data: number
+  up_info_speed: number
+  up_rate_limit: number
+  write_cache_overload: string
+}
