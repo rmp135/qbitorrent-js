@@ -416,6 +416,110 @@ Returns information about the overall transfer state of the client.
 await client.transferInfo()
 ```
 
+### Client.getPreferences
+
+Returns the client preferences.
+
+```js
+await client.preferences()
+```
+
+### Client.setPreferences
+
+Sets the preferences on the qBittorrent client.
+
+The only required parameters are `addTrackers` and `addTrackersEnabled`. The reason being is that these are the only options that are disabled / reset if they are not supplied.
+
+Some of the options have Typescript types that can be imported from the main module.
+
+```js
+await client.setPreferences({ addTrackers: [], addTrackersEnabled: false })
+```
+
+Parameters:
+  - options: object:
+    - savePath?: string : The default save path.
+    - tempPathEnabled?: boolean : Whether to store the file in a temporary location.
+    - tempPath?: string : The temporary location to save downloads.
+    - preallocateAll?: boolean : Pre allocate space for all files before downloading.
+    - incompleteFilesExtension?: boolean : Whether to use an extension for incomplete files.
+    - scanDirectories?: object:
+      - [key]: string : Location of scan directory.
+      - value: number : Where to save the torrents from the directory. (0 = Scan folder, 1 = Default save location)
+    - exportDirectory?: string : Directory to move .torrents files.
+    - exportDirectoryFinished?: string : Directory to move .torrent files that have completed.
+    - mailNotificationEnabled?: boolean : Whether mail notifications are enabled.
+    - mailNotificationEmail?: string : Address of mail notifications.
+    - mailNotificationSmtpServer?: string : SMTP server of mail notifications.
+    - mailNotificationSslEnabled?: boolean : Whether SSL is enabled for mail notifications.
+    - mailNotificationAuthEnabled?: boolean : Whether authentication is enabled for mail notifications.
+    - mailNotificationUsername?: string : Username for mail authentication.
+    - mailNotificationPassword?: string : Password for mail authentication.
+    - autorunEnabled?: boolean : Whether a program should be autorun on torrent completion.
+    - autorunProgram?: string : Program string that should be autorun on torrent completion.
+    - listenPort?: number
+    - upnpEnabled?: boolean
+    - randomPortEnabled?: boolean
+    - maxConnections?: number
+    - maxConnectionsPerTorrent?: number
+    - maxUploads?: number
+    - maxUploadsPerTorrents?: number
+    - proxyType?: number Type of proxy (0 = None, HTTP = 1, 2 = Socks5, 5 = Socks4)
+    - proxyAuthEnabled?: boolean
+    - proxyIp?: string
+    - proxyPort?: number
+    - proxyUseForPeerConnections?: boolean
+    - forceProxy?: boolean
+    - proxyUsername?: string
+    - proxyPassword?: string
+    - ipFilterEnabled?: boolean
+    - ipFilterPath?: string
+    - ipFilterTrackers?: boolean
+    - bannedIPs?: string[]
+    - uploadLimit?: number : Upload rate limit in kb/s.
+    - downloadLimit?: number : Download rate limit in kb/s.
+    - bittorrentProtocol?: string
+    - limitUtpRate?: boolean
+    - limitTcpOverhead?: boolean
+    - altUploadLimit?: number : Upload rate limit during schedular in kb/s
+    - altDownloadLimit?: number : Download rate limit during schedular in kb/s
+    - schedulerEnabled?: boolean
+    - schedulerFrom?: Date : Day / hour / minute the scheduler should begin.
+    - schedulerTo?: Date : Day / hour / minute the scheduler should end.
+    - schedulerDays?: number : The days the scheduler should run. (0 = Everyday, 1 = Weekdays, 2 = Weekends, 3 - 9 = Monday - Friday)
+    - dhtEnabled?: boolean
+    - peerExchangeEnabled?: boolean
+    - localPeerDiscoveryEnabled?: boolean
+    - encryptionMode?: number : Whether encryption mode (0 = Prefer, 1 = Force, 3 = Disabled)
+    - anonymousModeEnabled?: boolean
+    - queueingEnabled?: boolean
+    - maxActiveTorrents?: number
+    - maxActiveUploads?: number
+    - maxActiveDownloads?: number
+    - doNotCountSlowTorrents?: boolean
+    - maxRatio?: number
+    - maxSeedingTime?: number
+    - maxRatioAction?: number : Action to perform when max ration is reached (0 = Pause torrent, 1 = Remove  torrent)
+    - addTrackersEnabled: boolean
+    - addTrackers: string[]
+    - locale?: string
+    - webUiDomanList?: string
+    - webUiAddress?: string
+    - webUiPort?: number
+    - webUiUpnpEnabled?: boolean
+    - webUiUseHttps?: boolean
+    - webUiSslCert?: string
+    - webUiSslKey?: string
+    - webUiUsername?: string
+    - webUiPassword?: string
+    - webUiBypassLocalAuth?: boolean
+    - webUiBypassAuthSubnetWhitelistEnabled?: boolean
+    - webUiBypassAuthSubnetWhitelist?: string[]
+    - webUiDyndnsEnabled?: boolean
+    - webUiDyndnsService?: number : DNS service to use (0 = Dyndns, 1 = NoIp)
+    - webUiDyndnsUsername?: string
+    - webUiDyndnsPassword?: string
+    - webUiDyndnsDoman?: string
 ## Error Handling
 
 If a response is returned from the server that isn't status 200, a `ResponseError` will be thrown. This contains the `status`, `body` and text description of the status as the message.

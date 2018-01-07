@@ -23,10 +23,10 @@ export interface WebDownloadOptions extends SharedDownloadOptions {
 }
 
 export enum DownloadPriority {
-  IGNORED = 0,
-  NORMAL = 1,
-  HIGH = 6,
-  MAXIMUM = 7
+  Ignored = 0,
+  Normal = 1,
+  High = 6,
+  Maximum = 7
 }
 
 export interface ClientOptions {
@@ -34,14 +34,14 @@ export interface ClientOptions {
 }
 
 export enum QueryTorrentFilter {
-  ALL = 'all',
-  DOWNLOADING = 'downloading',
-  SEEDING = 'seeding',
-  COMPLETED = 'completed',
-  PAUSED = 'paused',
-  RESUMED = 'paused',
-  ACTIVE = 'active',
-  INACTIVE = 'inactive'
+  All = 'all',
+  Downloading = 'downloading',
+  Seeding = 'seeding',
+  Completed = 'completed',
+  Paused = 'paused',
+  Resumed = 'paused',
+  Active = 'active',
+  Inactive = 'inactive'
 }
 
 export interface QueryTorrentsParameters {
@@ -329,4 +329,214 @@ export interface TransferInfoResponse {
   up_info_speed: number
   up_rate_limit: number
   write_cache_overload: string
+}
+
+export enum ScanDirType {
+  ScanFolder = 0,
+  DefaultSaveLocation = 1
+}
+
+export enum ProxyType {
+  None = 0,
+  Socks4 = 5,
+  Socks5 = 2,
+  Http = 1
+}
+
+export enum EncryptionMode {
+  Prefer = 0,
+  Force = 1,
+  Disabled = 3
+}
+
+export enum DnsService {
+  DynDns = 0,
+  NoIp = 1
+}
+
+export enum SchedulerDays {
+  Everyday = 0,
+  Weekdays = 1,
+  Weekends = 2,
+  Mondays = 3,
+  Tuesdays = 4,
+  Wednesdays = 5,
+  Thursdays = 6,
+  Fridays = 7,
+  Saturdays = 8,
+  Sundays = 9
+}
+
+export enum MaxRatioAction {
+  Pause = 0,
+  Remove = 1
+}
+
+export interface PreferencesParameters {
+  savePath?: string
+  tempPathEnabled?: boolean
+  tempPath?: string
+  preallocateAll?: boolean
+  incompleteFilesExtension?: boolean
+  scanDirectories?: { [key: string]: ScanDirType }
+  exportDirectory?: string
+  exportDirectoryFinished?: string
+  mailNotificationEnabled?: boolean
+  mailNotificationEmail?: string
+  mailNotificationSmtpServer?: string
+  mailNotificationSslEnabled?: boolean
+  mailNotificationAuthEnabled?: boolean
+  mailNotificationUsername?: string
+  mailNotificationPassword?: string
+  autorunEnabled?: boolean
+  autorunProgram?: string
+  listenPort?: number
+  upnpEnabled?: boolean
+  randomPortEnabled?: boolean
+  maxConnections?: number
+  maxConnectionsPerTorrent?: number
+  maxUploads?: number
+  maxUploadsPerTorrents?: number
+  proxyType?: ProxyType
+  proxyAuthEnabled?: boolean
+  proxyIp?: string
+  proxyPort?: number
+  proxyUseForPeerConnections?: boolean
+  forceProxy?: boolean
+  proxyUsername?: string
+  proxyPassword?: string
+  ipFilterEnabled?: boolean
+  ipFilterPath?: string
+  ipFilterTrackers?: boolean
+  bannedIPs?: string[]
+  uploadLimit?: number
+  downloadLimit?: number
+  bittorrentProtocol?: string
+  limitUtpRate?: boolean
+  limitTcpOverhead?: boolean
+  altUploadLimit?: number
+  altDownloadLimit?: number
+  schedulerEnabled?: boolean
+  schedulerFrom?: Date
+  schedulerTo?: Date
+  schedulerDays?: SchedulerDays
+  dhtEnabled?: boolean
+  peerExchangeEnabled?: boolean
+  localPeerDiscoveryEnabled?: boolean
+  encryptionMode?: EncryptionMode
+  anonymousModeEnabled?: boolean
+  queueingEnabled?: boolean
+  maxActiveTorrents?: number
+  maxActiveUploads?: number
+  maxActiveDownloads?: number
+  doNotCountSlowTorrents?: boolean
+  maxRatio?: number
+  maxSeedingTime?: number
+  maxRatioAction?: MaxRatioAction
+  addTrackersEnabled: boolean
+  addTrackers: string[]
+  locale?: string
+  webUiDomanList?: string
+  webUiAddress?: string
+  webUiPort?: number
+  webUiUpnpEnabled?: boolean
+  webUiUseHttps?: boolean
+  webUiSslCert?: string
+  webUiSslKey?: string
+  webUiUsername?: string
+  webUiPassword?: string
+  webUiBypassLocalAuth?: boolean
+  webUiBypassAuthSubnetWhitelistEnabled?: boolean
+  webUiBypassAuthSubnetWhitelist?: string[]
+  webUiDyndnsEnabled?: boolean
+  webUiDyndnsService?: DnsService
+  webUiDyndnsUsername?: string
+  webUiDyndnsPassword?: string
+  webUiDyndnsDoman?: string
+}
+
+export interface PreferencesResponse {
+  add_trackers: string
+  add_trackers_enabled: false
+  alt_dl_limit: number
+  alt_up_limit: number
+  anonymous_mode: boolean
+  autorun_program: string
+  banned_IPs: string
+  bittorrent_protocol: number
+  bypass_auth_subnet_whitelist: string
+  bypass_auth_subnet_whitelist_enabled: boolean
+  bypass_local_auth: boolean
+  dht: boolean
+  dl_limit: number
+  dont_count_slow_torrents: boolean
+  dyndns_doman: string
+  dyndns_enabled: boolean
+  dyndns_password: string
+  dyndns_service: number
+  dyndns_username: string
+  encryption: number
+  export_dir: string
+  export_dir_fn: string
+  force_proxy: boolean
+  incomplete_files_ext: boolean
+  ip_filter_enabled: boolean
+  ip_filter_path: string
+  ip_filter_trackers: boolean
+  limit_tcp_overhead: boolean
+  limit_utp_rate: boolean
+  listen_port: boolean
+  locale: string
+  lsd: boolean
+  mail_notification_auth_enabled: boolean
+  mail_notification_email: string
+  mail_nofification_enabled: boolean
+  mail_notification_password: string
+  mail_notification_smtp: string
+  mail_notification_ssl_enabled: boolean
+  mail_notification_username: string
+  max_active_downloads: number
+  max_active_torrents: number
+  max_active_uploads: number
+  max_connect: number
+  max_connec_per_torrent: number
+  max_ratio: number
+  max_ratio_act: number
+  max_ratio_enabled: boolean
+  max_seeding_time: number
+  max_seeding_time_enabled: boolean
+  max_uploads: number
+  max_uploads_per_torrents: number
+  pex: boolean
+  preallocate_all: boolean
+  prox_auth_enabled: boolean
+  proxy_ip: string
+  proxy_password: string
+  proxy_peer_connections: boolean
+  proxy_port: number
+  proxy_type: ProxyType
+  proxy_username: string
+  queueing_enabled: boolean
+  random_port: boolean
+  save_path: string
+  scan_dirs: { [key: string]: ScanDirType }
+  schedule_from_hour: number
+  schedule_from_min: number
+  schedule_to_hour: number
+  schedule_to_min: number
+  scheduler_days: number
+  scheduler_enabled: boolean
+  ssl_cert: string
+  ssl_key: string
+  temp_path: string
+  temp_path_enabled: boolean
+  up_limit: number
+  upnp: boolean
+  use_https: boolean
+  web_ui_address: string
+  web_ui_domain_list: string
+  web_ui_password: string
+  web_ui_port: number
+  web_ui_upnp: boolean
+  web_ui_username: string
 }

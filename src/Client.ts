@@ -14,7 +14,9 @@ import {
   QueryTorrentResponse,
   QueryTorrentFilter,
   QueryTorrentsParameters,
-  TransferInfoResponse
+  TransferInfoResponse,
+  PreferencesResponse,
+  PreferencesParameters
 } from './typings'
 
 export default class Client {
@@ -255,7 +257,7 @@ export default class Client {
     } as FileDownloadOptions, options)
 
     const downloadOptions = {
-      "fileselect[]": createReadStream(options.file),
+      'fileselect[]': createReadStream(options.file),
       savepath: mergedOptions.savepath,
       cookie: mergedOptions.cookie,
       rename: mergedOptions.rename,
@@ -403,5 +405,108 @@ export default class Client {
    */
   async transferInfo(): Promise<TransferInfoResponse> {
     return get<TransferInfoResponse>(`${this.url}/query/transferInfo`)
+  }
+  
+  /**
+   * Returns the client preferences.
+   * 
+   * @returns {Promise<PreferencesResponse>} 
+   * @memberof Client
+   */
+  async getPreferences(): Promise<PreferencesResponse> {
+    return get<PreferencesResponse>(`${this.url}/query/preferences`)
+  }
+
+  /**
+   * Sets preferences on the qBittorrent client.
+   * Missing parameters will not be changed. 
+   * 
+   * @param {PreferencesParameters} options The preferences to set on the client. 
+   * @returns 
+   * @memberof Client
+   */
+  async setPreferences(options : PreferencesParameters) {
+    const actualOptions = {
+      save_path: options.savePath,
+      temp_path_enabled: options.tempPathEnabled,
+      temp_path: options.tempPathEnabled,
+      preallocate_all: options.preallocateAll,
+      incomplete_files_ext: options.incompleteFilesExtension,
+      scan_dirs: options.scanDirectories,
+      export_dir: options.exportDirectory,
+      export_dir_fin: options.exportDirectoryFinished,
+      mail_notification_enabled: options.mailNotificationEnabled,
+      mail_notification_email: options.mailNotificationEmail,
+      mail_notification_smtp: options.mailNotificationSmtpServer,
+      mail_notification_ssl_enabled: options.mailNotificationSslEnabled,
+      mail_notification_auth_enabled: options.mailNotificationAuthEnabled,
+      mail_notification_username: options.mailNotificationUsername,
+      mail_notification_password: options.mailNotificationPassword,
+      autorun_enabled: options.autorunEnabled,
+      autorun_program: options.autorunProgram,
+      listen_port: options.listenPort,
+      upnp: options.upnpEnabled,
+      random_port: options.randomPortEnabled,
+      max_connec: options.maxConnections,
+      max_connec_per_torrent: options.maxConnectionsPerTorrent,
+      max_uploads: options.maxUploads,
+      max_uploads_per_torrent: options.maxUploadsPerTorrents,
+      proxy_type: options.proxyType,
+      proxy_auth_enabled: options.proxyAuthEnabled,
+      proxy_ip: options.proxyIp,
+      proxy_port: options.proxyPort,
+      proxy_peer_connections: options.proxyUseForPeerConnections,
+      force_proxy: options.forceProxy,
+      proxy_username: options.proxyUsername,
+      proxy_password: options.proxyPassword,
+      ip_filter_enabled: options.ipFilterEnabled,
+      ip_filter_path: options.ipFilterPath,
+      ip_filter_trackers: options.ipFilterTrackers,
+      banned_IPs: options.bannedIPs != undefined ? options.bannedIPs.join('\n') : undefined,
+      up_limit: options.uploadLimit,
+      dl_limit: options.downloadLimit,
+      bittorrent_protocol: options.bittorrentProtocol,
+      limit_utp_rate: options.limitUtpRate,
+      limit_tcp_overhead: options.limitTcpOverhead,
+      alt_up_limit: options.altUploadLimit,
+      alt_dl_limit: options.altDownloadLimit,
+      scheduler_enabled: options.schedulerEnabled,
+      schedule_from_hour: options.schedulerFrom != undefined ? options.schedulerFrom.getHours() : undefined,
+      schedule_from_minute: options.schedulerFrom != undefined ? options.schedulerFrom.getMinutes() : undefined,
+      schedule_to_hour: options.schedulerFrom != undefined ? options.schedulerTo.getHours() : undefined,
+      schedule_to_minute: options.schedulerFrom != undefined ? options.schedulerTo.getMinutes() : undefined,
+      dht: options.dhtEnabled,
+      pex: options.peerExchangeEnabled,
+      lsd: options.localPeerDiscoveryEnabled,
+      encryption: options.encryptionMode,
+      anonymous_mode: options.anonymousModeEnabled,
+      queueing_enabled: options.queueingEnabled,
+      max_ratio_enabled: options.maxRatio != undefined,
+      max_ratio: options.maxRatio,
+      max_ratio_act: options.maxRatioAction,
+      max_seeding_time_enabled: options.maxSeedingTime != undefined,
+      max_seeding_time: options.maxSeedingTime,
+      add_trackers_enabled: options.addTrackersEnabled,
+      add_trackers: options.addTrackers != undefined ? options.addTrackers.join('\n') : undefined,
+      locale: options.locale,
+      web_ui_domain_list: options.webUiDomanList,
+      web_ui_address: options.webUiAddress,
+      web_ui_port: options.webUiPort,
+      web_ui_upnp: options.webUiUpnpEnabled,
+      use_https: options.webUiUseHttps,
+      ssl_key: options.webUiSslKey,
+      ssl_cert: options.webUiSslCert,
+      web_ui_username: options.webUiUsername,
+      web_ui_password: options.webUiPassword,
+      bypass_local_auth: options.webUiBypassLocalAuth,
+      bypass_auth_subnet_whitelist_enabled: options.webUiBypassAuthSubnetWhitelistEnabled,
+      bypass_auth_subnet_whitelist: options.webUiBypassAuthSubnetWhitelist != undefined ? options.webUiBypassAuthSubnetWhitelist.join(',') : undefined,
+      dyndns_enabled: options.webUiDyndnsEnabled,
+      dyndns_service: options.webUiDyndnsService,
+      dyndns_domain: options.webUiDyndnsDoman,
+      dyndns_username: options.webUiDyndnsUsername,
+      dyndns_password: options.webUiPassword
+    }
+    return post(`${this.url}/setPreferences`, { json: JSON.stringify(actualOptions)} )
   }
 }
