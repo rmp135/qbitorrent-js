@@ -520,6 +520,7 @@ Parameters:
     - webUiDyndnsUsername?: string
     - webUiDyndnsPassword?: string
     - webUiDyndnsDoman?: string
+
 ## Error Handling
 
 If a response is returned from the server that isn't status 200, a `ResponseError` will be thrown. This contains the `status`, `body` and text description of the status as the message.
